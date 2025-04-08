@@ -43,7 +43,7 @@ public class BlossomCommand {
 
 				.error(ctx -> {
 					if (ctx.type() == ErrorType.PERMISSION_DENIED) {
-						ctx.action(sender -> sender.sendRichMessage("<gray>Imagine not having permission in 2025 ☠.</red>"));
+						ctx.action(sender -> sender.sendRichMessage("<gray>Imagine not having permission in 2025 ☠.</gray>"));
 					} else {
 						ctx.action(sender -> {
 							sender.sendRichMessage(" ");
