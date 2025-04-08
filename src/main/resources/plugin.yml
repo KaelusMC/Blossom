@@ -1,0 +1,7 @@
+name: Blossom
+version: '${version}'
+main: com.xyrisdev.blossom.RegenerationPlugin
+api-version: '1.21'
+folia-supported: true
+softdepend:
+  - PlaceholderAPI

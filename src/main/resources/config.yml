@@ -1,0 +1,44 @@
+debug: false # Should Blossom print debug messages?
+
+regeneration:
+  teleport_to_top: true # Should Blossom yeet all players in the region to the top when it regenerates?
+  clear_entities: true # Should all the entities in the region be removed when the it regenerates?
+
+broadcast:
+  regeneration_warning: true # Should Blossom broadcast a warning to the players in the region when the region is about to be regenerated?
+  regenerated: true # Should Blossom broadcast a message to the players in the region when the region has been regenerated?
+
+# These are the sounds that Blossom will play when the messages are broadcasted.
+sounds:
+  regeneration_warning:
+    enabled: true
+    key: "minecraft:block.note_block.pling"
+    source: "MASTER"
+    volume: 1.0
+    pitch: 1.5
+  regeneration:
+    enabled: true
+    key: "minecraft:entity.shulker.teleport"
+    source: "MASTER"
+    volume: 1.0
+    pitch: 3.0
+
+# Pretty self-explanatory—no need for a novel here.
+messages:
+  regeneration_warning:
+    enabled: true
+    type: list
+    messages:
+      - " "
+      - "<b><gradient:#8c75a5:#f46c90>Blossom</gradient></b>"
+      - "<gray>The region <gradient:#8c75a5:#f46c90><name></gradient> will be regenerated in <time>.</gray>"
+      - " "
+
+  regenerated:
+    enabled: true
+    type: list
+    messages:
+      - " "
+      - "<b><gradient:#8c75a5:#f46c90>Blossom</gradient></b>"
+      - "<gray>The region <gradient:#8c75a5:#f46c90><name></gradient> has been regenerated.</gray>"
+      - " "
