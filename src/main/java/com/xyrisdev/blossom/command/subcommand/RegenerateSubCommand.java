@@ -47,7 +47,19 @@ public class RegenerateSubCommand implements RegisterableSubCommand {
 									.id("regenerated")
 									.placeholders("name", RegionManager.instance().region(region.getName()).getDisplayName())
 									.send();
-							player.playSound(Sound.sound(Key.key("minecraft:entity.shulker.teleport"), Sound.Source.MASTER, 1.0f, 3.0f));
+
+							if (RegenerationPlugin.getInstance().config().get("sounds.regeneration.enabled", true)) {
+								float volume = ((Number) RegenerationPlugin.getInstance().config().get("sounds.regeneration.volume", 1.0f)).floatValue();
+								float pitch = ((Number) RegenerationPlugin.getInstance().config().get("sounds.regeneration.pitch", 3.0f)).floatValue();
+
+								Sound sound = Sound.sound(
+										Key.key(RegenerationPlugin.getInstance().config().get("sounds.regeneration.key", "minecraft:entity.shulker.teleport")),
+										Sound.Source.valueOf(RegenerationPlugin.getInstance().config().get("sounds.regeneration.source", "MASTER")),
+										volume,
+										pitch
+								);
+								player.playSound(sound);
+							}
 						}
 					});
 

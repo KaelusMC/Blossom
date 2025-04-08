@@ -60,11 +60,14 @@ public class RegenerationTaskScheduler {
 								.send();
 
 						if (RegenerationPlugin.getInstance().config().get("sounds.regeneration.enabled", true)) {
+							float volume = ((Number) RegenerationPlugin.getInstance().config().get("sounds.regeneration.volume", 1.0f)).floatValue();
+							float pitch = ((Number) RegenerationPlugin.getInstance().config().get("sounds.regeneration.pitch", 3.0f)).floatValue();
+
 							Sound sound = Sound.sound(
 									Key.key(RegenerationPlugin.getInstance().config().get("sounds.regeneration.key", "minecraft:entity.shulker.teleport")),
 									Sound.Source.valueOf(RegenerationPlugin.getInstance().config().get("sounds.regeneration.source", "MASTER")),
-									RegenerationPlugin.getInstance().config().get("sounds.regeneration.volume", 1.0f),
-									RegenerationPlugin.getInstance().config().get("sounds.regeneration.pitch", 3.0f)
+									volume,
+									pitch
 							);
 							player.playSound(sound);
 						}
@@ -120,11 +123,14 @@ public class RegenerationTaskScheduler {
 								.send();
 
 						if (RegenerationPlugin.getInstance().config().get("sounds.regeneration_warning.enabled", true)) {
+							float volume = ((Number) RegenerationPlugin.getInstance().config().get("sounds.regeneration_warning.volume", 1.0f)).floatValue();
+							float pitch = ((Number) RegenerationPlugin.getInstance().config().get("sounds.regeneration_warning.pitch", 1.5f)).floatValue();
+
 							Sound sound = Sound.sound(
 									Key.key(RegenerationPlugin.getInstance().config().get("sounds.regeneration_warning.key", "minecraft:block.note_block.pling")),
 									Sound.Source.valueOf(RegenerationPlugin.getInstance().config().get("sounds.regeneration_warning.source", "MASTER")),
-									RegenerationPlugin.getInstance().config().get("sounds.regeneration_warning.volume", 1.0f),
-									RegenerationPlugin.getInstance().config().get("sounds.regeneration_warning.pitch", 1.5f)
+									volume,
+									pitch
 							);
 							player.playSound(sound);
 						}
