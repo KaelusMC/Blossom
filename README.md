@@ -6,7 +6,7 @@ Blossom is a powerful plugin designed to regenerate arenas and regions (large co
 ***
 
 ### Usage
-Creating and managing arenas with Blossom is so easy that even a newbie can do it! Just run `/blossom menu`, and you'll see for yourself. *Wink.*
+Creating and managing arenas with Blossom is so easy that even a newbie can do it! Just run `/blossom create`, and you'll see for yourself. *Wink.*
 
 ### Statistics
 We've extensively tested regenerating 1 million blocks repeatedly, and the performance impact was minimal. The regeneration time ranged between 150-500ms, even on a local server.
