@@ -3,7 +3,7 @@ package com.xyrisdev.blossom;
 import com.xyrisdev.blossom.command.BlossomCommand;
 import com.xyrisdev.blossom.hook.hooks.PlaceholderAPIHook;
 import com.xyrisdev.blossom.listener.PlayerInteractListener;
-import com.xyrisdev.blossom.listener.PlayerJoinListener;
+import com.xyrisdev.blossom.listener.PlayerQuitListener;
 import com.xyrisdev.blossom.region.RegionManager;
 import com.xyrisdev.blossom.region.task.RegenerationTaskScheduler;
 import com.xyrisdev.library.AbstractPlugin;
@@ -32,7 +32,7 @@ public final class RegenerationPlugin extends AbstractPlugin {
 
 		RegionManager.of();
 
-		plugins().registerEvents(new PlayerJoinListener(), this);
+		plugins().registerEvents(new PlayerQuitListener(), this);
 		plugins().registerEvents(new PlayerInteractListener(), this);
 		BlossomCommand.blossom(this).register();
 		PlaceholderAPIHook.of().register();
