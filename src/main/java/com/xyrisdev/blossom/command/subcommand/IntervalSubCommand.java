@@ -35,6 +35,7 @@ public class IntervalSubCommand implements RegisterableSubCommand {
 					final String unit = context.resolve("unit");
 
 					if (intervalValue == null || intervalValue <= 0 || unit == null) {
+						player.sendRichMessage("<b><gradient:#8c75a5:#f46c90>Blossom</gradient></b> <gray>→ Invalid arguments. Please use /blossom inverval <region> <interval> <unit></gray>");
 						return;
 					}
 
@@ -44,7 +45,7 @@ public class IntervalSubCommand implements RegisterableSubCommand {
 						case "m" -> intervalValue * 60_000L;
 						case "h" -> intervalValue * 3_600_000L;
 						default -> {
-							player.sendRichMessage("<red>Invalid time unit!</red>");
+							player.sendRichMessage("<b><gradient:#8c75a5:#f46c90>Blossom</gradient></b> <gray>→ Invalid time unit. Example usage: /blossom interval <region> 1 m</gray>");
 							yield -1L;
 						}
 					};
@@ -60,6 +61,14 @@ public class IntervalSubCommand implements RegisterableSubCommand {
 					player.sendRichMessage(" ");
 					player.sendRichMessage("<gray>→ Region <color:#f29db4>" + region.getName() + "</color></gray> " + "<gray>interval set to <color:#f29db4>" + intervalValue + unit + ".</color></gray>");
 					player.sendRichMessage(" ");
+				})
+				.error(error -> {
+					switch (error.type()) {
+						case MISSING_ARGUMENT -> error.action(sender ->
+								sender.sendRichMessage("<b><gradient:#8c75a5:#f46c90>Blossom</gradient></b> <gray>→ Missing arguments. Please use /blossom interval <region> <interval> <unit></gray>"));
+						case INVALID_ARGUMENT -> error.action(sender ->
+								sender.sendRichMessage("<b><gradient:#8c75a5:#f46c90>Blossom</gradient></b> <gray>→ Invalid arguments. Please use /blossom interval <region> <interval> <unit></gray>"));
+					}
 				});
-	}
+	};
 }

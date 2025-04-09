@@ -42,6 +42,7 @@ public class CreateSubCommand implements RegisterableSubCommand {
 					player.sendRichMessage(" ");
 					player.sendRichMessage("<gray>→ Region <gradient:#8c75a5:#f46c90>" + name + "</gradient> has been created.</gray>");
 					player.sendRichMessage(" ");
-				});
+				})
+				.error(context -> context.action(sender -> sender.sendRichMessage("<b><gradient:#8c75a5:#f46c90>Blossom</gradient></b> <gray>→ Failed to create a region );.</gray>")));
 	}
 }

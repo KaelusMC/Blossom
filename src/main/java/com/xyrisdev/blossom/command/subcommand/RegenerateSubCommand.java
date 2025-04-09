@@ -5,12 +5,11 @@ import com.xyrisdev.blossom.command.argument.RegionArgumentType;
 import com.xyrisdev.blossom.region.RegionManager;
 import com.xyrisdev.blossom.region.model.Region;
 import com.xyrisdev.blossom.util.AsyncWorldEditUtil;
+import com.xyrisdev.blossom.util.SoundUtil;
 import com.xyrisdev.blossom.util.command.RegisterableSubCommand;
 import com.xyrisdev.library.command.Commands;
 import com.xyrisdev.library.location.XLocation;
 import com.xyrisdev.library.message.XMessageBuilder;
-import net.kyori.adventure.key.Key;
-import net.kyori.adventure.sound.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -29,6 +28,7 @@ public class RegenerateSubCommand implements RegisterableSubCommand {
 					final Region region = context.resolve("region");
 
 					if (region == null || !region.valid() && !region.schematic()) {
+						sender.sendRichMessage("<b><gradient:#8c75a5:#f46c90>Blossom</gradient></b> <gray>→ Region does not exist. Please provide a valid region.</gray>");
 						return;
 					}
 
@@ -48,18 +48,7 @@ public class RegenerateSubCommand implements RegisterableSubCommand {
 									.placeholders("name", RegionManager.instance().region(region.getName()).getDisplayName())
 									.send();
 
-							if (RegenerationPlugin.getInstance().config().get("sounds.regeneration.enabled", true)) {
-								float volume = ((Number) RegenerationPlugin.getInstance().config().get("sounds.regeneration.volume", 1.0f)).floatValue();
-								float pitch = ((Number) RegenerationPlugin.getInstance().config().get("sounds.regeneration.pitch", 3.0f)).floatValue();
-
-								Sound sound = Sound.sound(
-										Key.key(RegenerationPlugin.getInstance().config().get("sounds.regeneration.key", "minecraft:entity.shulker.teleport")),
-										Sound.Source.valueOf(RegenerationPlugin.getInstance().config().get("sounds.regeneration.source", "MASTER")),
-										volume,
-										pitch
-								);
-								player.playSound(sound);
-							}
+							SoundUtil.play(player, "sounds.regeneration");
 						}
 					});
 

@@ -4,6 +4,7 @@ import com.xyrisdev.blossom.RegenerationPlugin;
 import com.xyrisdev.blossom.region.RegionManager;
 import com.xyrisdev.blossom.region.model.Region;
 import com.xyrisdev.blossom.util.AsyncWorldEditUtil;
+import com.xyrisdev.blossom.util.SoundUtil;
 import com.xyrisdev.library.location.XLocation;
 import com.xyrisdev.library.message.XMessageBuilder;
 import com.xyrisdev.library.scheduler.XRunnable;
@@ -59,18 +60,7 @@ public class RegenerationTaskScheduler {
 								.placeholders("name", RegionManager.instance().region(name).getDisplayName())
 								.send();
 
-						if (RegenerationPlugin.getInstance().config().get("sounds.regeneration.enabled", true)) {
-							float volume = ((Number) RegenerationPlugin.getInstance().config().get("sounds.regeneration.volume", 1.0f)).floatValue();
-							float pitch = ((Number) RegenerationPlugin.getInstance().config().get("sounds.regeneration.pitch", 3.0f)).floatValue();
-
-							Sound sound = Sound.sound(
-									Key.key(RegenerationPlugin.getInstance().config().get("sounds.regeneration.key", "minecraft:entity.shulker.teleport")),
-									Sound.Source.valueOf(RegenerationPlugin.getInstance().config().get("sounds.regeneration.source", "MASTER")),
-									volume,
-									pitch
-							);
-							player.playSound(sound);
-						}
+						SoundUtil.play(player, "sounds.regeneration");
 					}
 				});
 
@@ -122,18 +112,7 @@ public class RegenerationTaskScheduler {
 								.placeholders("name", RegionManager.instance().region(name).getDisplayName(), "time", timeString)
 								.send();
 
-						if (RegenerationPlugin.getInstance().config().get("sounds.regeneration_warning.enabled", true)) {
-							float volume = ((Number) RegenerationPlugin.getInstance().config().get("sounds.regeneration_warning.volume", 1.0f)).floatValue();
-							float pitch = ((Number) RegenerationPlugin.getInstance().config().get("sounds.regeneration_warning.pitch", 1.5f)).floatValue();
-
-							Sound sound = Sound.sound(
-									Key.key(RegenerationPlugin.getInstance().config().get("sounds.regeneration_warning.key", "minecraft:block.note_block.pling")),
-									Sound.Source.valueOf(RegenerationPlugin.getInstance().config().get("sounds.regeneration_warning.source", "MASTER")),
-									volume,
-									pitch
-							);
-							player.playSound(sound);
-						}
+						SoundUtil.play(player, "sounds.regeneration_warning");
 					});
 				}
 			}.runTaskLater(RegenerationPlugin.getInstance(), (intervalMs - warningMs) / 50));

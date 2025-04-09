@@ -11,7 +11,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-@SuppressWarnings("UnstableApiUsage")
 public class ManageSubCommand implements RegisterableSubCommand {
 
 	@Override
