@@ -16,6 +16,7 @@ sounds:
     source: "MASTER"
     volume: 1.0
     pitch: 1.5
+
   regeneration:
     enabled: true
     key: "minecraft:entity.shulker.teleport"

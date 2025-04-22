@@ -12,6 +12,8 @@ import com.xyrisdev.library.lib.Library;
 import com.xyrisdev.library.lib.feature.FeatureFlags;
 import com.xyrisdev.library.lib.feature.FeatureRegistry;
 import com.xyrisdev.library.logger.XLogger;
+import com.xyrisdev.library.scheduler.XScheduler;
+import com.xyrisdev.library.scheduler.scheduling.schedulers.TaskScheduler;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,12 +21,16 @@ public final class RegenerationPlugin extends AbstractPlugin {
 
 	@Getter
 	private static RegenerationPlugin instance;
+
+	private TaskScheduler scheduler;
 	private CachableConfiguration config;
 
 	@Override
 	protected void run() {
 		instance = this;
 		Library.of(this, "blossom");
+
+		scheduler = XScheduler.of(this);
 
 		config = CachableConfiguration.builder()
 				.file("config.yml")
@@ -56,6 +62,10 @@ public final class RegenerationPlugin extends AbstractPlugin {
 
 	public @NotNull CachableConfiguration config() {
 		return config;
+	}
+
+	public @NotNull TaskScheduler scheduler() {
+		return scheduler;
 	}
 
 	public void debug(@NotNull String message) {
