@@ -24,6 +24,11 @@ sounds:
     volume: 1.0
     pitch: 3.0
 
+# These are the placeholder format that Blossom will use.
+placeholders:
+  interval:
+    format: "h:m:s" # The format that the time will be displayed in.
+
 # Pretty self-explanatory—no need for a novel here.
 messages:
   regeneration_warning:

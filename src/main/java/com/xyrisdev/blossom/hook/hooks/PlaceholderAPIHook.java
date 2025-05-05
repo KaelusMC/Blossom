@@ -3,12 +3,11 @@ package com.xyrisdev.blossom.hook.hooks;
 import com.xyrisdev.blossom.RegenerationPlugin;
 import com.xyrisdev.blossom.hook.BlossomHook;
 import com.xyrisdev.blossom.region.task.RegenerationTaskScheduler;
-import com.xyrisdev.library.time.XTime;
+import com.xyrisdev.blossom.util.time.TimeFormatter;
+import com.xyrisdev.blossom.util.time.format.TimeFormat;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.concurrent.TimeUnit;
 
 @SuppressWarnings("UnstableApiUsage")
 public class PlaceholderAPIHook extends PlaceholderExpansion {
@@ -41,8 +40,10 @@ public class PlaceholderAPIHook extends PlaceholderExpansion {
 	@Override
 	public String onPlaceholderRequest(Player player, @NotNull String identifier) {
 		if (identifier.startsWith("interval_")) {
-			String regionName = identifier.substring("interval_".length());
-			return XTime.format(RegenerationTaskScheduler.left(regionName), TimeUnit.MILLISECONDS);
+			final String regionName = identifier.substring("interval_".length());
+			final long interval = RegenerationTaskScheduler.left(regionName);
+
+			return TimeFormatter.format(interval, TimeFormat.of(RegenerationPlugin.getInstance().config().getString("placeholders.interval.format")));
 		}
 
 		return "";
