@@ -26,9 +26,10 @@ public class TimeFormatter {
 				case MILLISECONDS -> milliseconds;
 			};
 
-			final String formatted = segment.format(value) + segment.symbol().getSuffix();
-
-			joiner.add(formatted);
+			if (value > 0) {
+				final String formatted = segment.format(value) + segment.symbol().getSuffix();
+				joiner.add(formatted);
+			}
 		});
 
 		return joiner.toString();

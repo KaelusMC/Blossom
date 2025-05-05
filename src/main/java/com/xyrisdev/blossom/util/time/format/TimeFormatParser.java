@@ -11,15 +11,22 @@ import java.util.List;
 public class TimeFormatParser {
 
 	public TimeFormat parse(@NotNull String pattern) {
+		if (pattern.isEmpty()) {
+			System.err.println("Invalid pattern provided: " + pattern);
+			throw new IllegalArgumentException("Time pattern must not be null or empty");
+		}
+
 		final List<TimeSegment> segments = new ArrayList<>();
 
-		Arrays.stream(pattern.split(":")).filter(part -> !part.isBlank()).forEach(part -> {
-			final char symbolChar = part.charAt(part.length() - 1);
-			final int length = part.length();
-			final TimeSymbol symbol = TimeSymbol.from(symbolChar);
+		Arrays.stream(pattern.split(":"))
+				.filter(part -> !part.isBlank())
+				.forEach(part -> {
+					final char symbolChar = part.charAt(part.length() - 1);
+					final int length = part.length();
+					final TimeSymbol symbol = TimeSymbol.from(symbolChar);
 
-			segments.add(new TimeSegment(symbol, length));
-		});
+					segments.add(new TimeSegment(symbol, length));
+				});
 
 		return new TimeFormat(segments);
 	}
